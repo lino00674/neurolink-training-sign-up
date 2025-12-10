@@ -2,10 +2,8 @@ import { RegistrationForm } from "@/components/RegistrationForm";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { CalendarDays, Clock, MapPin, Sparkles, Users } from "lucide-react";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen gradient-subtle">
+  return <div className="min-h-screen gradient-subtle">
       {/* Header */}
       <header className="border-b bg-card/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -35,7 +33,7 @@ const Index = () => {
             </div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
               Dominando a{" "}
-              <span className="text-gradient">Automação</span>
+              <span className="text-gradient bg-muted text-primary-foreground">Automação</span>
               <br />e Microinterações
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -45,7 +43,9 @@ const Index = () => {
 
           {/* Info Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-            <div className="bg-card rounded-xl p-5 shadow-card flex items-start gap-4 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+            <div className="bg-card rounded-xl p-5 shadow-card flex items-start gap-4 animate-fade-in" style={{
+            animationDelay: "0.1s"
+          }}>
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <CalendarDays className="w-6 h-6 text-primary" />
               </div>
@@ -57,7 +57,9 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="bg-card rounded-xl p-5 shadow-card flex items-start gap-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            <div className="bg-card rounded-xl p-5 shadow-card flex items-start gap-4 animate-fade-in" style={{
+            animationDelay: "0.2s"
+          }}>
               <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
                 <Clock className="w-6 h-6 text-accent" />
               </div>
@@ -69,7 +71,9 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="bg-card rounded-xl p-5 shadow-card flex items-start gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            <div className="bg-card rounded-xl p-5 shadow-card flex items-start gap-4 animate-fade-in" style={{
+            animationDelay: "0.3s"
+          }}>
               <div className="w-12 h-12 rounded-lg bg-success/10 flex items-center justify-center flex-shrink-0">
                 <MapPin className="w-6 h-6 text-success" />
               </div>
@@ -83,7 +87,9 @@ const Index = () => {
           </div>
 
           {/* Registration Form */}
-          <div className="animate-slide-up" style={{ animationDelay: "0.4s" }}>
+          <div className="animate-slide-up" style={{
+          animationDelay: "0.4s"
+        }}>
             <h2 className="text-2xl font-bold mb-6 text-center">
               Faça sua inscrição
             </h2>
@@ -98,8 +104,6 @@ const Index = () => {
           © 2024 NeuroLink Solutions — Todos os direitos reservados
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
