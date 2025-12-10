@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/hooks/use-toast";
 import {
@@ -28,13 +27,11 @@ import {
   Users,
   Filter,
   Sparkles,
-  LogOut,
   Loader2,
   CheckCircle,
   XCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { User, Session } from "@supabase/supabase-js";
 
 type Registration = {
   id: string;
@@ -50,9 +47,6 @@ type Registration = {
 };
 
 export default function HRArea() {
-  const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [filteredRegistrations, setFilteredRegistrations] = useState<Registration[]>([]);
@@ -61,30 +55,8 @@ export default function HRArea() {
   const [dayFilter, setDayFilter] = useState<string>("all");
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        if (!session) {
-          navigate("/auth");
-        }
-      }
-    );
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      
-      if (!session) {
-        navigate("/auth");
-      } else {
-        fetchRegistrations();
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
+    fetchRegistrations();
+  }, []);
 
   async function fetchRegistrations() {
     setIsLoading(true);
@@ -177,15 +149,6 @@ export default function HRArea() {
     });
   }
 
-  async function handleLogout() {
-    await supabase.auth.signOut();
-    navigate("/auth");
-  }
-
-  if (!session) {
-    return null;
-  }
-
   return (
     <div className="min-h-screen gradient-subtle">
       {/* Header */}
@@ -196,14 +159,6 @@ export default function HRArea() {
               <Sparkles className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-bold text-lg">NeuroLink Solutions</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-muted-foreground hidden md:block">
-              {user?.email}
-            </span>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut className="w-4 h-4" />
-            </Button>
           </div>
         </div>
       </header>
